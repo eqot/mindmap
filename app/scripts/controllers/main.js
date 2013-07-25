@@ -2,9 +2,23 @@
 
 angular.module('mindmapApp')
   .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
+    $scope.nodes = [
+      {
+        label: 'test0',
+        children: [
+          {
+            label: 'test0-1',
+            children: []
+          },
+          {
+            label: 'test0-2',
+            children: []
+          }
+        ]
+      },
+      {
+        label: 'test1',
+        children: []
+      }
     ];
   });
