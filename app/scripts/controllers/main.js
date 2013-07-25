@@ -55,4 +55,10 @@ angular.module('mindmapApp')
         }, 1);
       }
     };
+
+    $(document).keydown(function (event) {
+      if (event.keyCode === 27) {
+        $scope.focus();
+      }
+    });
   });
