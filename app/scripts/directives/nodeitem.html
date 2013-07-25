@@ -1,3 +1,8 @@
-<li>
-  {{nodeitem.label}}
+<li ng-click="focus($event)">
+  <div ng-hide="editable()">
+    <span>{{nodeitem.label}}</span>
+  </div>
+  <div ng-show="editable()">
+    <input type="text" ng-model="nodeitem.label">
+  </div>
 </li>

@@ -27,4 +27,6 @@ angular.module('mindmapApp')
         children: []
       }
     ];
+
+    $scope.focusedElement = null;
   });
