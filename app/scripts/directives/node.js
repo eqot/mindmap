@@ -33,11 +33,11 @@ angular.module('mindmapApp')
         scope.focus = function (event) {
           event.stopPropagation();
 
-          $rootScope.$$childHead.focus(element);
+          $rootScope.$$childHead.focusedElement = element;
         };
 
         scope.submit = function () {
-          $rootScope.$$childHead.focus();
+          $rootScope.$$childHead.focusedElement = null;
         };
       }
     };
