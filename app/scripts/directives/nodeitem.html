@@ -3,6 +3,8 @@
     <span>{{nodeitem.label}}</span>
   </div>
   <div ng-show="editable()">
-    <input type="text" ng-model="nodeitem.label">
+    <form ng-submit="submit()">
+      <input type="text" ng-model="nodeitem.label">
+    </form>
   </div>
 </li>
