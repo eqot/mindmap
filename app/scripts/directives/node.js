@@ -33,9 +33,13 @@ angular.module('mindmapApp')
         scope.focus = function (event) {
           event.stopPropagation();
 
+          var focusedElement = $rootScope.$$childHead.focusedElement;
+          if (focusedElement === element) {
+            return;
+          }
+
           element.addClass('edit');
 
-          var focusedElement = $rootScope.$$childHead.focusedElement;
           if (focusedElement) {
             focusedElement.removeClass('edit');
           }
