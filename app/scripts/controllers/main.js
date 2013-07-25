@@ -1,7 +1,9 @@
+/*global $ */
+
 'use strict';
 
 angular.module('mindmapApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, $timeout) {
     $scope.nodes = [
       {
         label: 'test0',
@@ -35,13 +37,22 @@ angular.module('mindmapApp')
         return;
       }
 
-      if ($scope.focusedElement) {
-        $scope.focusedElement.removeClass(EDIT_CLASS);
+      var focusedElement = $scope.focusedElement;
+      if (focusedElement) {
+        focusedElement.removeClass(EDIT_CLASS);
+
+        $timeout(function () {
+          $(focusedElement.find('input')[0]).blur();
+        }, 1);
       }
       $scope.focusedElement = element || null;
 
       if (element) {
         element.addClass(EDIT_CLASS);
+
+        $timeout(function () {
+          $(element.find('input')[0]).focus();
+        }, 1);
       }
     };
   });
