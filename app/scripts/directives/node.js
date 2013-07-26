@@ -34,10 +34,18 @@ angular.module('mindmapApp')
           event.stopPropagation();
 
           $rootScope.$$childHead.focusedElement = element;
+          $rootScope.$$childHead.editingElement = null;
+        };
+
+        scope.edit = function (event) {
+          event.stopPropagation();
+
+          $rootScope.$$childHead.focusedElement = null;
+          $rootScope.$$childHead.editingElement = element;
         };
 
         scope.submit = function () {
-          $rootScope.$$childHead.focusedElement = null;
+          $rootScope.$$childHead.editingElement = null;
         };
       }
     };

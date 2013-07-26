@@ -33,6 +33,20 @@ angular.module('mindmapApp')
     $scope.focusedElement = null;
 
     $scope.$watch('focusedElement', function (newElement, oldElement) {
+      var FOCUS_CLASS = 'focus';
+
+      if (oldElement) {
+        $(oldElement[0].children[0].children[0]).removeClass(FOCUS_CLASS);
+      }
+
+      if (newElement) {
+        $(newElement[0].children[0].children[0]).addClass(FOCUS_CLASS);
+      }
+    });
+
+    $scope.editingElement = null;
+
+    $scope.$watch('editingElement', function (newElement, oldElement) {
       var EDIT_CLASS = 'edit';
 
       if (oldElement) {
@@ -54,7 +68,7 @@ angular.module('mindmapApp')
 
     $(document).keydown(function (event) {
       if (event.keyCode === 27) {
-        $scope.focusedElement = null;
+        $scope.editingElement = null;
         $scope.$apply();
       }
     });
