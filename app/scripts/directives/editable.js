@@ -77,8 +77,18 @@ angular.module('mindmapApp')
         $(document).keydown(function (event) {
           // console.log(event.keyCode);
           switch (event.keyCode) {
+          case 13: // Enter key
+            if (focusedElement) {
+              that.edit(focusedElement);
+              that.focus(null);
+            }
+            break;
+
           case 27: // ESC key
-            that.edit();
+            if (editingElement) {
+              that.focus(editingElement);
+              that.edit();
+            }
             break;
 
           case 38: // Up key
