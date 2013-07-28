@@ -26,6 +26,17 @@ angular.module('mindmapApp')
       },
       {
         label: 'test1',
+        children: [
+          {
+            label: 'test1-0'
+          },
+          {
+            label: 'test1-1'
+          }
+        ]
+      },
+      {
+        label: 'test2',
         children: []
       }
     ];
