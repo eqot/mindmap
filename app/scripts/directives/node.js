@@ -12,7 +12,7 @@ angular.module('mindmapApp')
     };
   })
 
-  .directive('nodeitem', function ($compile, $rootScope) {
+  .directive('nodeitem', function ($compile) {
     return {
       restrict: 'E',
       templateUrl: 'scripts/directives/nodeitem.html',
@@ -20,7 +20,8 @@ angular.module('mindmapApp')
       scope: {
         nodeitem: '='
       },
-      link: function (scope, element) {
+      require: '^editable',
+      link: function (scope, element, attrs, editableCtrl) {
         if (angular.isArray(scope.nodeitem.children)) {
           element.append('<nodetree nodetree="nodeitem.children" />');
           $compile(element.contents())(scope);
@@ -33,19 +34,19 @@ angular.module('mindmapApp')
         scope.focus = function (event) {
           event.stopPropagation();
 
-          $rootScope.$$childHead.focusedElement = element;
-          $rootScope.$$childHead.editingElement = null;
+          editableCtrl.focus(element);
+          editableCtrl.edit();
         };
 
         scope.edit = function (event) {
           event.stopPropagation();
 
-          $rootScope.$$childHead.focusedElement = null;
-          $rootScope.$$childHead.editingElement = element;
+          editableCtrl.focus();
+          editableCtrl.edit(element);
         };
 
         scope.submit = function () {
-          $rootScope.$$childHead.editingElement = null;
+          editableCtrl.edit();
         };
       }
     };
