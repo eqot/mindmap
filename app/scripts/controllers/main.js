@@ -1,5 +1,3 @@
-/*global $ */
-
 'use strict';
 
 angular.module('mindmapApp')
