@@ -22,6 +22,8 @@ angular.module('mindmapApp')
       },
       require: '^editable',
       link: function (scope, element, attrs, editableCtrl) {
+        editableCtrl.addElement(element);
+
         if (angular.isArray(scope.nodeitem.children)) {
           element.append('<nodetree nodetree="nodeitem.children" />');
           $compile(element.contents())(scope);

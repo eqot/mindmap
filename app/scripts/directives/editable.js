@@ -10,11 +10,17 @@ angular.module('mindmapApp')
       transclude: true,
       template: '<div ng-transclude></div>',
       controller: function () {
+        var elements = [];
+
         var FOCUS_CLASS = 'focus';
         var EDIT_CLASS = 'edit';
 
         var focusedElement = null;
         var editingElement = null;
+
+        this.addElement = function (element) {
+          elements.push(element);
+        };
 
         this.focus = function (element) {
           var oldElement = focusedElement;
@@ -51,9 +57,40 @@ angular.module('mindmapApp')
         };
 
         var that = this;
+
+        function moveFocus(delta) {
+          if (!focusedElement) {
+            return;
+          }
+
+          var index = elements.indexOf(focusedElement);
+          // console.log(index);
+          index += delta;
+          if (index < 0 || index >= elements.length) {
+            return;
+          }
+
+          var element = elements[index];
+          that.focus(element);
+        }
+
         $(document).keydown(function (event) {
-          if (event.keyCode === 27) {
+          // console.log(event.keyCode);
+          switch (event.keyCode) {
+          case 27: // ESC key
             that.edit();
+            break;
+
+          case 38: // Up key
+            moveFocus(-1);
+            break;
+
+          case 40: // Down key
+            moveFocus(+1);
+            break;
+
+          default:
+            break;
           }
         });
       }
