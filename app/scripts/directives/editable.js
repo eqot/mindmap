@@ -28,11 +28,11 @@ angular.module('mindmapApp')
           focusedElement = element || null;
 
           if (oldElement) {
-            $(oldElement[0].children[0].children[0]).removeClass(FOCUS_CLASS);
+            oldElement.removeClass(FOCUS_CLASS);
           }
 
           if (element) {
-            $(element[0].children[0].children[0]).addClass(FOCUS_CLASS);
+            element.addClass(FOCUS_CLASS);
           }
         };
 
