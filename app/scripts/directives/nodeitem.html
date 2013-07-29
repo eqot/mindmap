@@ -1,12 +1,11 @@
 <li ng-click="focus($event)" ng-dblclick="edit($event)">
   <div ng-hide="editable()">
-    <i class="icon-folder-close" ng-show="hasChildren" />
-    <i class="icon-file" ng-show="!hasChildren" />
+    <i ng-class="{'icon-folder-close': hasChildren, 'icon-file': !hasChildren}" />
     <span>{{nodeitem.label}}</span>
   </div>
   <div ng-show="editable()">
-    <i class="icon-folder-close" ng-show="hasChildren" />
     <form ng-submit="submit()">
+      <i ng-class="{'icon-folder-close': hasChildren, 'icon-file': !hasChildren}" />
       <input type="text" ng-model="nodeitem.label">
     </form>
   </div>
