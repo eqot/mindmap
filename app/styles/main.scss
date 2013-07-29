@@ -39,6 +39,10 @@ span.focus {
   background-color: lightblue;
 }
 
+li {
+  list-style-type: none;
+}
+
 .collapsed ul {
   display: none;
 }
