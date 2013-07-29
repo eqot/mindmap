@@ -14,6 +14,7 @@ angular.module('mindmapApp')
 
         var FOCUS_CLASS = 'focus';
         var EDIT_CLASS = 'edit';
+        var COLLAPSE_CLASS = 'collapsed';
 
         var focusedElement = null;
         var editingElement = null;
@@ -74,6 +75,22 @@ angular.module('mindmapApp')
           that.focus(element);
         }
 
+        function collapse () {
+          if (!focusedElement) {
+            return;
+          }
+
+          focusedElement.addClass(COLLAPSE_CLASS);
+        }
+
+        function expand () {
+          if (!focusedElement) {
+            return;
+          }
+
+          focusedElement.removeClass(COLLAPSE_CLASS);
+        }
+
         $(document).keydown(function (event) {
           // console.log(event.keyCode);
           switch (event.keyCode) {
@@ -97,6 +114,14 @@ angular.module('mindmapApp')
 
           case 40: // Down key
             moveFocus(+1);
+            break;
+
+          case 37: // Left key
+            collapse();
+            break;
+
+          case 39: // Right key
+            expand();
             break;
 
           default:
