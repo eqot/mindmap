@@ -24,7 +24,10 @@ angular.module('mindmapApp')
       link: function (scope, element, attrs, editableCtrl) {
         editableCtrl.addElement(element);
 
+        element.scope = scope;
+
         scope.hasChildren = angular.isArray(scope.nodeitem.children);
+        scope.collapsed = false;
 
         if (scope.hasChildren) {
           element.append('<nodetree nodetree="nodeitem.children" />');

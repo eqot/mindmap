@@ -81,6 +81,7 @@ angular.module('mindmapApp')
           }
 
           focusedElement.addClass(COLLAPSE_CLASS);
+          focusedElement.scope.collapsed = true;
         }
 
         function expand () {
@@ -89,6 +90,8 @@ angular.module('mindmapApp')
           }
 
           focusedElement.removeClass(COLLAPSE_CLASS);
+          focusedElement.scope.collapsed = false;
+          focusedElement.scope.$apply();
         }
 
         $(document).keydown(function (event) {

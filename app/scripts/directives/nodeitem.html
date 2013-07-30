@@ -1,5 +1,6 @@
 <li ng-click="focus($event)" ng-dblclick="edit($event)">
   <div ng-hide="editable()">
+    <i ng-class="{'icon-chevron-down': !collapsed, 'icon-chevron-right': collapsed}" />
     <i ng-class="{'icon-folder-close': hasChildren, 'icon-file': !hasChildren}" />
     <span>{{nodeitem.label}}</span>
   </div>
