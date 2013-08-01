@@ -7,7 +7,7 @@
   <div ng-show="editable()">
     <form ng-submit="submit()">
       <i ng-class="{'icon-folder-close': hasChildren, 'icon-file': !hasChildren}" />
-      <input type="text" ng-model="nodeitem.label">
+      <input type="text" ng-model="nodeitem.label" ng-change="lazySave()">
     </form>
   </div>
 </li>

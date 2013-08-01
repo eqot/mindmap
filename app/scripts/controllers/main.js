@@ -3,11 +3,38 @@
 angular.module('mindmapApp')
   .controller('MainCtrl', function ($scope, MindMap) {
 
+    $scope.saved = true;
+
     var id = 'mindmap_0';
     MindMap.get(id, function (mindmap) {
       $scope.mindmap = mindmap;
       // console.log($scope.mindmap);
     });
+
+    var saveTimer = null;
+    $scope.lazySave = function () {
+      $scope.saved = false;
+
+      cancelLazySave();
+
+      saveTimer = setTimeout(function () {
+        saveTimer = null;
+        doSave();
+      }, 3000);
+    };
+
+    function cancelLazySave () {
+      if (saveTimer) {
+        clearTimeout(saveTimer);
+        saveTimer = null;
+      }
+    }
+
+    function doSave () {
+      MindMap.save(id, $scope.mindmap, function () {
+        $scope.saved = true;
+      });
+    }
 
 /*
     $scope.mindmap = {
@@ -50,6 +77,4 @@ angular.module('mindmapApp')
       ]
     };
 */
-    // MindMap.save(id, $scope.mindmap, function (mindmap) {
-    // });
   });
