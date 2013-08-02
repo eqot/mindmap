@@ -11,7 +11,7 @@ angular.module('mindmapApp')
     var editingNode = null;
 
     function addNode (node) {
-      nodes.push = node;
+      nodes.push(node);
     }
 
     function focus (node, forceToUpdate) {
