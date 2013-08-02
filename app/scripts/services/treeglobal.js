@@ -60,6 +60,15 @@ angular.module('mindmapApp')
       focus(element, true);
     }
 
+    function collapse (delta) {
+      if (!focusedNode) {
+        return;
+      }
+
+      focusedNode.collapsed = delta;
+      focusedNode.$apply();
+    }
+
     $(document).keydown(function (event) {
       // console.log(event.keyCode);
 
@@ -87,13 +96,13 @@ angular.module('mindmapApp')
         moveFocus(+1);
         break;
 
-      // case 37: // Left key
-      //   collapse();
-      //   break;
+      case 37: // Left key
+        collapse(true);
+        break;
 
-      // case 39: // Right key
-      //   expand();
-      //   break;
+      case 39: // Right key
+        collapse(false);
+        break;
 
       default:
         break;

@@ -7,7 +7,8 @@ angular.module('mindmapApp')
       templateUrl: 'scripts/directives/treenode.html',
       replace: true,
       scope: {
-        treenode: '='
+        treenode: '=',
+        collapsed: '='
       }
     };
   })
@@ -28,12 +29,12 @@ angular.module('mindmapApp')
         scope.focused = false;
         scope.editing = false;
 
-        // scope.collapsed = false;
+        scope.collapsed = false;
 
         scope.hasChildren = angular.isArray(scope.node.children);
 
         if (scope.hasChildren) {
-          element.append('<treenode treenode="node.children" />');
+          element.append('<treenode treenode="node.children" collapsed="collapsed" />');
           $compile(element.contents())(scope);
         }
 
