@@ -44,6 +44,22 @@ angular.module('mindmapApp')
       update(editingNode, true);
     }
 
+    function moveFocus (delta) {
+      if (!focusedNode) {
+        return;
+      }
+
+      var index = nodes.indexOf(focusedNode);
+      // console.log(index);
+      index += delta;
+      if (index < 0 || index >= nodes.length) {
+        return;
+      }
+
+      var element = nodes[index];
+      focus(element, true);
+    }
+
     $(document).keydown(function (event) {
       // console.log(event.keyCode);
 
@@ -63,13 +79,13 @@ angular.module('mindmapApp')
         }
         break;
 
-      // case 38: // Up key
-      //   moveFocus(-1);
-      //   break;
+      case 38: // Up key
+        moveFocus(-1);
+        break;
 
-      // case 40: // Down key
-      //   moveFocus(+1);
-      //   break;
+      case 40: // Down key
+        moveFocus(+1);
+        break;
 
       // case 37: // Left key
       //   collapse();
