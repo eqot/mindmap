@@ -26,6 +26,8 @@ angular.module('mindmapApp')
 
         TreeUi.addNode(scope);
 
+        scope.element = element;
+
         scope.focused = false;
         scope.editing = false;
 
@@ -55,7 +57,7 @@ angular.module('mindmapApp')
     };
   })
 
-  .factory('TreeUi', function() {
+  .factory('TreeUi', function($timeout) {
     var nodes = [];
 
     var focusedNode = null;
@@ -95,6 +97,12 @@ angular.module('mindmapApp')
 
       update(oldNode, 'editing', false, forceToUpdate);
       update(newNode, 'editing', true, forceToUpdate);
+
+      if (newNode) {
+        $timeout(function () {
+          newNode.element.find('input').focus();
+        }, 1);
+      }
     }
 
     function collapse (collapsed) {
