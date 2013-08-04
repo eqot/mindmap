@@ -33,9 +33,11 @@ angular.module('mindmapApp')
 
         scope.collapsed = false;
 
-        scope.hasChildren = angular.isArray(scope.node.children);
+        scope.hasChildren = function () {
+          return scope.node.children && angular.isArray(scope.node.children);
+        };
 
-        if (scope.hasChildren) {
+        if (scope.hasChildren()) {
           element.append('<treenode treenode="node.children" collapsed="collapsed" />');
           $compile(element.contents())(scope);
         }
@@ -57,7 +59,6 @@ angular.module('mindmapApp')
         scope.addChild = function () {
           if (!scope.node.children) {
             scope.node.children = [];
-            scope.hasChildren = true;
 
             scope.element.append('<treenode treenode="node.children" collapsed="collapsed" />');
             $compile(scope.element.contents())(scope);
