@@ -1,3 +1,5 @@
+/*global $ */
+
 'use strict';
 
 angular.module('mindmapApp')
@@ -21,7 +23,7 @@ angular.module('mindmapApp')
       scope: {
         node: '='
       },
-      link: function (scope, element, attrs) {
+      link: function (scope, element) {
         // console.log(scope);
 
         TreeUi.addNode(scope);
