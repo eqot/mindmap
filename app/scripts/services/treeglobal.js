@@ -14,36 +14,6 @@ angular.module('mindmapApp')
       nodes.push(node);
     }
 
-    function focus (node, forceToUpdate) {
-      function update (node, flag) {
-        if (node) {
-          node.focused = flag;
-          if (forceToUpdate) {
-            node.$apply();
-          }
-        }
-      }
-
-      update(focusedNode, false);
-      focusedNode = node;
-      update(focusedNode, true);
-    }
-
-    function edit (node, forceToUpdate) {
-      function update (node, flag) {
-        if (node) {
-          node.editing = flag;
-          if (forceToUpdate) {
-            node.$apply();
-          }
-        }
-      }
-
-      update(editingNode, false);
-      editingNode = node;
-      update(editingNode, true);
-    }
-
     function moveFocus (delta) {
       if (!focusedNode) {
         return;
@@ -56,17 +26,38 @@ angular.module('mindmapApp')
         return;
       }
 
-      var element = nodes[index];
-      focus(element, true);
+      var newNode = nodes[index];
+      focus(newNode, true);
     }
 
-    function collapse (delta) {
-      if (!focusedNode) {
-        return;
-      }
+    function focus (newNode, forceToUpdate) {
+      var oldNode = focusedNode;
+      focusedNode = newNode;
 
-      focusedNode.collapsed = delta;
-      focusedNode.$apply();
+      update(oldNode, 'focused', false, forceToUpdate);
+      update(newNode, 'focused', true, forceToUpdate);
+    }
+
+    function edit (newNode, forceToUpdate) {
+      var oldNode = editingNode;
+      editingNode = newNode;
+
+      update(oldNode, 'editing', false, forceToUpdate);
+      update(newNode, 'editing', true, forceToUpdate);
+    }
+
+    function collapse (collapsed) {
+      update(focusedNode, 'collapsed', collapsed, true);
+    }
+
+    function update (node, state, flag, forceToUpdate) {
+      if (node) {
+        node[state] = flag;
+
+        if (forceToUpdate) {
+          node.$apply();
+        }
+      }
     }
 
     $(document).keydown(function (event) {
@@ -75,7 +66,6 @@ angular.module('mindmapApp')
       switch (event.keyCode) {
       case 13: // Enter key
         if (focusedNode) {
-          // that.edit(focusedNode, true);
           edit(focusedNode, true);
           focus(null, true);
         }
