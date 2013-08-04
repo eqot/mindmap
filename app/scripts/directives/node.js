@@ -53,6 +53,21 @@ angular.module('mindmapApp')
           TreeUi.edit(scope);
           TreeUi.focus(null);
         };
+
+        scope.addChild = function () {
+          if (!scope.node.children) {
+            scope.node.children = [];
+            scope.hasChildren = true;
+
+            scope.element.append('<treenode treenode="node.children" collapsed="collapsed" />');
+            $compile(scope.element.contents())(scope);
+          }
+
+          scope.node.children.push({
+            label: 'test',
+            children: []
+          });
+        };
       }
     };
   })
@@ -151,6 +166,13 @@ angular.module('mindmapApp')
 
       case 39: // Right key
         collapse(false);
+        break;
+
+      case 107: // + key
+        if (focusedNode) {
+          focusedNode.addChild();
+          focusedNode.$apply();
+        }
         break;
 
       default:
