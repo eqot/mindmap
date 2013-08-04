@@ -41,40 +41,47 @@ angular.module('mindmapApp')
       title: 'test',
       content: [
         {
-          label: 'test0',
+          label: 'root',
           children: [
             {
-              label: 'test0-0'
-            },
-            {
-              label: 'test0-1',
+              label: 'test0',
               children: [
                 {
-                  label: 'test0-1-0'
+                  label: 'test0-0'
                 },
                 {
-                  label: 'test0-1-1'
+                  label: 'test0-1',
+                  children: [
+                    {
+                      label: 'test0-1-0'
+                    },
+                    {
+                      label: 'test0-1-1'
+                    }
+                  ]
                 }
               ]
-            }
-          ]
-        },
-        {
-          label: 'test1',
-          children: [
-            {
-              label: 'test1-0'
             },
             {
-              label: 'test1-1'
+              label: 'test1',
+              children: [
+                {
+                  label: 'test1-0'
+                },
+                {
+                  label: 'test1-1'
+                }
+              ]
+            },
+            {
+              label: 'test2',
+              children: []
             }
           ]
-        },
-        {
-          label: 'test2',
-          children: []
         }
       ]
     };
+
+    doSave();
 */
   });
