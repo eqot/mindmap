@@ -97,13 +97,17 @@ angular.module('mindmapApp')
         };
 
         scope.remove = function () {
-          TreeUi.removeNode(scope);
-
           var parent = scope.getParent();
           if (parent) {
             parent.removeChild(scope.node);
             parent.$apply();
+
+            TreeUi.removeNode(scope);
+
+            return true;
           }
+
+          return false;
         };
       }
     };
@@ -221,8 +225,10 @@ angular.module('mindmapApp')
       case 46:  // Del key
       case 109: // - key
         if (focusedNode) {
-          focusedNode.remove();
-          focusedNode = null;
+          var result = focusedNode.remove();
+          if (result) {
+            focusedNode = null;
+          }
         }
         break;
 
