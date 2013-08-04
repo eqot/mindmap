@@ -26,6 +26,8 @@ angular.module('mindmapApp')
       link: function (scope, element) {
         // console.log(scope);
 
+        var TREE_NODE_HTML = '<treenode treenode="node.children" collapsed="collapsed" />';
+
         TreeUi.addNode(scope);
 
         scope.element = element;
@@ -40,8 +42,12 @@ angular.module('mindmapApp')
         };
 
         if (scope.hasChildren()) {
-          element.append('<treenode treenode="node.children" collapsed="collapsed" />');
+          element.append(TREE_NODE_HTML);
           $compile(element.contents())(scope);
+
+          for (var i = 0; i < scope.node.children.length; i++) {
+            scope.node.children[i].parent = scope;
+          }
         }
 
         scope.focus = function (event) {
@@ -58,18 +64,46 @@ angular.module('mindmapApp')
           TreeUi.focus(null);
         };
 
+        scope.getParent = function () {
+          return scope.node.parent;
+        };
+
+        scope.getChildren = function () {
+          return scope.node.children;
+        };
+
         scope.addChild = function () {
           if (!scope.node.children) {
             scope.node.children = [];
 
-            scope.element.append('<treenode treenode="node.children" collapsed="collapsed" />');
+            scope.element.append(TREE_NODE_HTML);
             $compile(scope.element.contents())(scope);
           }
 
           scope.node.children.push({
             label: 'test',
-            children: []
+            children: [],
+            parent: scope
           });
+
+          scope.$apply();
+        };
+
+        scope.removeChild = function (node) {
+          var index = scope.node.children.indexOf(node);
+          if (index !== -1) {
+            scope.node.children.splice(index, 1);
+          }
+        };
+
+        scope.remove = function () {
+          TreeUi.removeNode(scope);
+
+          var parent = scope.getParent();
+          if (parent) {
+            parent.removeChild(scope.node);
+            parent.$apply();
+          }
         };
       }
     };
@@ -83,6 +117,13 @@ angular.module('mindmapApp')
 
     function addNode (node) {
       nodes.push(node);
+    }
+
+    function removeNode (node) {
+      var index = nodes.indexOf(node);
+      if (index !== -1) {
+        nodes.splice(index, 1);
+      }
     }
 
     function moveFocus (delta) {
@@ -174,7 +215,14 @@ angular.module('mindmapApp')
       case 107: // + key
         if (focusedNode) {
           focusedNode.addChild();
-          focusedNode.$apply();
+        }
+        break;
+
+      case 46:  // Del key
+      case 109: // - key
+        if (focusedNode) {
+          focusedNode.remove();
+          focusedNode = null;
         }
         break;
 
@@ -185,6 +233,7 @@ angular.module('mindmapApp')
 
     return {
       addNode: addNode,
+      removeNode: removeNode,
       focus: focus,
       edit: edit
     };
