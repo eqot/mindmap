@@ -51,14 +51,18 @@ angular.module('mindmapApp')
         }
 
         scope.focus = function (event) {
-          event.stopPropagation();
+          if (event) {
+            event.stopPropagation();
+          }
 
           TreeUi.focus(scope);
           TreeUi.edit(null);
         };
 
         scope.edit = function (event) {
-          event.stopPropagation();
+          if (event) {
+            event.stopPropagation();
+          }
 
           TreeUi.edit(scope);
           TreeUi.focus(null);
@@ -161,11 +165,15 @@ angular.module('mindmapApp')
       update(oldNode, 'editing', false, forceToUpdate);
       update(newNode, 'editing', true, forceToUpdate);
 
-      if (newNode) {
-        $timeout(function () {
+      $timeout(function () {
+        if (oldNode) {
+          oldNode.element.find('input').blur();
+        }
+
+        if (newNode) {
           newNode.element.find('input').focus();
-        }, 1);
-      }
+        }
+      }, 1);
     }
 
     function collapse (collapsed) {

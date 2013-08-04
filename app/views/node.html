@@ -5,7 +5,7 @@
     <span>{{node.label}}</span>
   </div>
   <div ng-show="editing">
-    <form ng-submit="submit()">
+    <form ng-submit="focus()">
       <i ng-class="{'icon-folder-close': hasChildren(), 'icon-file': !hasChildren()}" />
       <input type="text" ng-model="node.label" ng-change="lazySave()">
     </form>
