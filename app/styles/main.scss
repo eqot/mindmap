@@ -35,14 +35,14 @@ form, input[type="text"] {
   margin-bottom: 0
 }
 
-.focused > div > span {
-  background-color: lightblue;
-}
-
 li {
   list-style-type: none;
 }
 
 .collapsed ul {
   display: none;
+}
+
+span.focused {
+  background-color: lightblue;
 }

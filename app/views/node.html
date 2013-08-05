@@ -1,13 +1,6 @@
-<li ng-class="{'focused': focused}" ng-click="focus($event)" ng-dblclick="edit($event)">
-  <div ng-hide="editing">
-    <i ng-class="{'icon-chevron-down': !collapsed, 'icon-chevron-right': collapsed}" />
-    <i ng-class="{'icon-folder-close': hasChildren(), 'icon-file': !hasChildren()}" />
-    <span>{{node.label}}</span>
-  </div>
-  <div ng-show="editing">
-    <form ng-submit="focus()">
-      <i ng-class="{'icon-folder-close': hasChildren(), 'icon-file': !hasChildren()}" />
-      <input type="text" ng-model="node.label" ng-change="lazySave()">
-    </form>
-  </div>
+<li>
+  <i ng-class="{'icon-chevron-down': !collapsed, 'icon-chevron-right': collapsed}" />
+  <i ng-class="{'icon-folder-close': hasChildren(), 'icon-file': !hasChildren()}" />
+  <span ng-hide="editing" ng-class="{'focused': focused}" ng-click="focus($event)" ng-dblclick="edit($event)">{{node.label}}</span>
+  <input ng-show="editing" type="text" ng-model="node.label" ng-change="lazySave()">
 </li>

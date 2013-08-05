@@ -37,6 +37,10 @@ angular.module('mindmapApp')
 
         scope.collapsed = false;
 
+        scope.lazySave = function () {
+          // console.log('ok');
+        };
+
         scope.hasChildren = function () {
           return scope.node.children && angular.isArray(scope.node.children);
         };
@@ -195,7 +199,10 @@ angular.module('mindmapApp')
 
       switch (event.keyCode) {
       case 13: // Enter key
-        if (focusedNode) {
+        if (editingNode) {
+          focus(editingNode, true);
+          edit(null, true);
+        } else if (focusedNode) {
           edit(focusedNode, true);
           focus(null, true);
         }
