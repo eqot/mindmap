@@ -233,7 +233,10 @@ angular.module('mindmapApp')
 
       case 107: // + key
         if (focusedNode) {
-          focusedNode.addChild();
+          var node = event.shiftKey ? focusedNode.getParent() : focusedNode;
+          if (node) {
+            node.addChild();
+          }
         }
         break;
 
