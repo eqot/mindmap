@@ -41,6 +41,12 @@ angular.module('mindmapApp')
           // console.log('ok');
         };
 
+        scope.cancelEvent = function (event) {
+          if (event) {
+            event.stopPropagation();
+          }
+        };
+
         scope.hasChildren = function () {
           return scope.node.children && angular.isArray(scope.node.children);
         };
@@ -252,6 +258,13 @@ angular.module('mindmapApp')
 
       default:
         break;
+      }
+    });
+
+    $(document).click(function () {
+      if (editingNode) {
+        focus(editingNode, true);
+        edit(null, true);
       }
     });
 
