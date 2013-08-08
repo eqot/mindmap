@@ -172,6 +172,18 @@ angular.module('mindmapApp')
 
       var newNode = nodes[index];
       focus(newNode, true);
+
+      var element = newNode.element.find('span')[0];
+      var elementRect = element.getClientRects()[0];
+      if (delta < 0) {
+        if (elementRect.top < 0) {
+          element.scrollIntoView(true);
+        }
+      } else {
+        if (elementRect.bottom > window.innerHeight) {
+          element.scrollIntoView(false);
+        }
+      }
     }
 
     function focus (newNode, forceToUpdate) {
@@ -236,10 +248,12 @@ angular.module('mindmapApp')
         break;
 
       case 38: // Up key
+        event.preventDefault();
         moveFocus(-1);
         break;
 
       case 40: // Down key
+        event.preventDefault();
         moveFocus(+1);
         break;
 
