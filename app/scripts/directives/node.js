@@ -127,7 +127,7 @@ angular.module('mindmapApp')
     };
   })
 
-  .factory('TreeUi', function($timeout) {
+  .factory('TreeUi', function($timeout, $filter) {
     var nodes = [];
 
     var focusedNode = null;
@@ -135,6 +135,8 @@ angular.module('mindmapApp')
 
     function addNode (node) {
       nodes.push(node);
+
+      sortNodes();
 
       if (nodes.length === 1) {
         focus(node);
@@ -146,6 +148,16 @@ angular.module('mindmapApp')
       if (index !== -1) {
         nodes.splice(index, 1);
       }
+
+      sortNodes();
+    }
+
+    function sortNodes () {
+      var sorter = $filter('orderBy');
+      var sortedNodes = sorter(nodes, 'element.0.offsetTop');
+      // console.log(sortedNodes);
+
+      nodes = sortedNodes;
     }
 
     function moveFocus (delta) {
