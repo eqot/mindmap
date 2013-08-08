@@ -137,19 +137,15 @@ angular.module('mindmapApp')
       nodes.push(node);
 
       sortNodes();
-
-      if (nodes.length === 1) {
-        focus(node);
-      }
     }
 
     function removeNode (node) {
       var index = nodes.indexOf(node);
       if (index !== -1) {
         nodes.splice(index, 1);
-      }
 
-      sortNodes();
+        sortNodes();
+      }
     }
 
     function sortNodes () {
@@ -162,6 +158,8 @@ angular.module('mindmapApp')
 
     function moveFocus (delta) {
       if (!focusedNode) {
+        focus(nodes[0], true);
+
         return;
       }
 
