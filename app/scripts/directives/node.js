@@ -28,14 +28,14 @@ angular.module('mindmapApp')
 
         var TREE_NODE_HTML = '<treenode treenode="node.children" collapsed="collapsed" />';
 
-        TreeUi.addNode(scope);
-
         scope.element = element;
 
         scope.focused = false;
         scope.editing = false;
 
         scope.collapsed = false;
+
+        TreeUi.addNode(scope);
 
         scope.lazySave = function () {
           // console.log('ok');
@@ -135,6 +135,10 @@ angular.module('mindmapApp')
 
     function addNode (node) {
       nodes.push(node);
+
+      if (nodes.length === 1) {
+        focus(node);
+      }
     }
 
     function removeNode (node) {
