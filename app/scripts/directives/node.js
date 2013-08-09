@@ -173,14 +173,16 @@ angular.module('mindmapApp')
       var newNode = nodes[index];
       focus(newNode, true);
 
+      var contentRect = $('#content')[0].getClientRects()[0];
+
       var element = newNode.element.find('span')[0];
       var elementRect = element.getClientRects()[0];
       if (delta < 0) {
-        if (elementRect.top < 0) {
+        if (elementRect.top < contentRect.top) {
           element.scrollIntoView(true);
         }
       } else {
-        if (elementRect.bottom > window.innerHeight) {
+        if (elementRect.bottom > contentRect.bottom) {
           element.scrollIntoView(false);
         }
       }
@@ -295,6 +297,14 @@ angular.module('mindmapApp')
         edit(null, true);
       }
     });
+
+    function resize () {
+      var content = $('#content');
+      var contentRect = content[0].getClientRects()[0];
+      content.height(window.innerHeight - contentRect.top);
+    }
+    resize();
+    window.onresize = resize;
 
     return {
       addNode: addNode,
