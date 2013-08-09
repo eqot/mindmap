@@ -301,7 +301,7 @@ angular.module('mindmapApp')
     function resize () {
       var content = $('#content');
       var contentRect = content[0].getClientRects()[0];
-      content.height(window.innerHeight - contentRect.top);
+      content.height(window.innerHeight - contentRect.top - 15);
     }
     resize();
     window.onresize = resize;
