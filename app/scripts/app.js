@@ -8,8 +8,8 @@ angular.module('mindmapApp', ['ngResource'])
         controller: 'ListCtrl'
       })
       .when('/:id', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/detail.html',
+        controller: 'DetailCtrl'
       })
       .otherwise({
         redirectTo: '/'
