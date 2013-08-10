@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span3">
+      <h1>MindMap</h1>
+      Search: <input ng-model="query"><br>
+      Sort By:
+      <select ng-model="orderProp">
+        <option value="title">Alphabetical</option>
+        <option value="age">Newest</option>
+        <option value="-age">Oldest</option>
+      </select>
+      <button ng-click="createMindMap()">Create MindMap</button>
+    </div>
+    <div class="span9">
+      <ul class="mindmaps">
+        <li ng-repeat="mindmap in mindmaps | filter:query | orderBy:orderProp">
+          <a href="#/{{mindmap._id}}">
+            {{mindmap.title}}
+          </a>
+          <p>{{mindmap.content}}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
