@@ -11,14 +11,14 @@
       </select>
       <button ng-click="createMindMap()">Create MindMap</button>
     </div>
-    <div class="span9">
+    <div id="list" class="span9">
       <table class="table table-bordered">
         <tr ng-repeat="mindmap in mindmaps | filter:query | orderBy:orderProp">
           <td ng-class="{'selected': mindmap.selected}">
             <input type="checkbox" ng-model="mindmap.selected">
-            <span ng-click="toggleStar($index)">
+            <span id="star" ng-click="toggleStar($index)">
               <span ng-hide="mindmap.star">☆</span>
-              <span ng-show="mindmap.star" id="star">★</span>
+              <span ng-show="mindmap.star" id="star-enabled">★</span>
             </span>
             <a href="#/{{mindmap._id}}">
               {{mindmap.title}}

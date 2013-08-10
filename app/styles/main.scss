@@ -11,6 +11,10 @@ html, body {
 
 /* List View */
 
+#list {
+  margin-top: 15px;
+}
+
 input[type="checkbox"] {
   margin-top: -2px;
 }
@@ -26,6 +30,10 @@ td {
 }
 
 #star {
+  margin-right: 8px;
+}
+
+#star-enabled {
   color: orange;
 }
 
