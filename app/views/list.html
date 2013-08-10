@@ -12,14 +12,21 @@
       <button ng-click="createMindMap()">Create MindMap</button>
     </div>
     <div class="span9">
-      <ul class="mindmaps">
-        <li ng-repeat="mindmap in mindmaps | filter:query | orderBy:orderProp">
-          <a href="#/{{mindmap._id}}">
-            {{mindmap.title}}
-          </a>
-          <p>{{mindmap.content}}</p>
-        </li>
-      </ul>
+      <table class="table table-striped table-bordered">
+        <!--
+        <tr>
+          <th>Title</th>
+        </tr>
+        -->
+        <tr ng-repeat="mindmap in mindmaps | filter:query | orderBy:orderProp">
+          <td>
+            <input type="checkbox">
+            <a href="#/{{mindmap._id}}">
+              {{mindmap.title}}
+            </a>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>

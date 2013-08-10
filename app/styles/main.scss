@@ -8,6 +8,16 @@ html, body {
   height: 100%;
 }
 
+
+/* List View */
+
+input[type="checkbox"] {
+  margin-top: -2px;
+}
+
+
+/* Detail View */
+
 #title {
   margin: 15px 0;
 }
