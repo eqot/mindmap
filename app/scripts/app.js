@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mindmapApp', [])
+angular.module('mindmapApp', ['ngResource'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
