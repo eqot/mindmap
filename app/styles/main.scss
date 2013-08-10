@@ -3,7 +3,7 @@ $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
 
 @import "bootstrap-sass/lib/bootstrap";
 
-/* Put your CSS here */
+/* Generic */
 html, body {
   height: 100%;
 }
@@ -13,6 +13,28 @@ html, body {
 
 input[type="checkbox"] {
   margin-top: -2px;
+}
+
+td {
+  &:hover {
+    background-color: #eff;
+  }
+
+  &.selected {
+    background-color: #ffc;
+  }
+}
+
+#star {
+  color: orange;
+}
+
+a {
+  color: black;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 

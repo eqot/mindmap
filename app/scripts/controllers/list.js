@@ -19,4 +19,13 @@ angular.module('mindmapApp')
         $scope.mindmaps.push(mindmap);
       });
     };
+
+    $scope.toggleStar = function (index) {
+      var mindmap = $scope.mindmaps[index];
+      if (mindmap.star) {
+        mindmap.star = false;
+      } else {
+        mindmap.star = true;
+      }
+    };
   });
