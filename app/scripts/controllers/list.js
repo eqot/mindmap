@@ -26,7 +26,7 @@ angular.module('mindmapApp')
         if (mindmap.selected) {
           $scope.mindmaps.splice(i, 1);
 
-          MindMap.delete({id: mindmap._id});
+          mindmap.$delete();
         }
       }
     };
