@@ -20,6 +20,17 @@ angular.module('mindmapApp')
       });
     };
 
+    $scope.deleteMindMap = function () {
+      for (var i = $scope.mindmaps.length - 1; i >= 0; i--) {
+        var mindmap = $scope.mindmaps[i];
+        if (mindmap.selected) {
+          $scope.mindmaps.splice(i, 1);
+
+          MindMap.delete({id: mindmap._id});
+        }
+      }
+    };
+
     $scope.toggleStar = function (index) {
       var mindmap = $scope.mindmaps[index];
       if (mindmap.star) {
