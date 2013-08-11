@@ -1,10 +1,13 @@
 'use strict';
 
 angular.module('mindmapApp')
-  .controller('DetailCtrl', function ($scope, $routeParams, MindMap) {
+  .controller('DetailCtrl', function ($scope, $rootScope, $routeParams, MindMap) {
+
     var id = $routeParams.id;
 
-    $scope.mindmap = MindMap.get({id: id});
+    $scope.mindmap = MindMap.get({id: id}, function () {
+      $rootScope.title = ': ' + $scope.mindmap.title;
+    });
 
     $scope.saved = true;
 

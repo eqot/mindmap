@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('mindmapApp')
-  .controller('ListCtrl', function ($scope, MindMap) {
+  .controller('ListCtrl', function ($scope, $rootScope, MindMap) {
+
+    $rootScope.title = '';
 
     $scope.mindmaps = MindMap.query();
 
