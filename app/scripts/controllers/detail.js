@@ -9,11 +9,16 @@ angular.module('mindmapApp')
       $rootScope.title = ': ' + $scope.mindmap.title;
     });
 
+    $rootScope.$on('save', function () {
+      $scope.lazySave();
+    });
+
     $scope.saved = true;
 
     var saveTimer = null;
     $scope.lazySave = function () {
       $scope.saved = false;
+      $scope.$apply();
 
       cancelLazySave();
 
@@ -31,7 +36,7 @@ angular.module('mindmapApp')
     }
 
     function doSave () {
-      MindMap.save(id, $scope.mindmap, function () {
+      $scope.mindmap.$update(function () {
         $scope.saved = true;
       });
     }

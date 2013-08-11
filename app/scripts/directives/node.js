@@ -37,14 +37,8 @@ angular.module('mindmapApp')
 
         TreeUi.addNode(scope);
 
-        scope.lazySave = function () {
-          // console.log('ok');
-        };
-
-        scope.cancelEvent = function (event) {
-          if (event) {
-            event.stopPropagation();
-          }
+        scope.save = function () {
+          $rootScope.$broadcast('save');
         };
 
         scope.hasChildren = function () {
@@ -59,6 +53,12 @@ angular.module('mindmapApp')
             scope.node.children[i].parent = scope;
           }
         }
+
+        scope.cancelEvent = function (event) {
+          if (event) {
+            event.stopPropagation();
+          }
+        };
 
         scope.focus = function (event) {
           if (event) {
@@ -101,6 +101,8 @@ angular.module('mindmapApp')
           });
 
           scope.$apply();
+
+          scope.save();
         };
 
         scope.removeChild = function (node) {
@@ -113,10 +115,12 @@ angular.module('mindmapApp')
         scope.remove = function () {
           var parent = scope.getParent();
           if (parent) {
+            TreeUi.removeNode(scope);
+
             parent.removeChild(scope.node);
             parent.$apply();
 
-            TreeUi.removeNode(scope);
+            scope.save();
 
             return true;
           }
@@ -196,9 +200,20 @@ angular.module('mindmapApp')
       update(newNode, 'focused', true, forceToUpdate);
     }
 
+    var oldLabel = null;
+
     function edit (newNode, forceToUpdate) {
       var oldNode = editingNode;
       editingNode = newNode;
+
+      if (oldNode) {
+        if (oldLabel !== oldNode.node.label) {
+          oldNode.save();
+        }
+      }
+      if (newNode) {
+        oldLabel = newNode.node.label;
+      }
 
       update(oldNode, 'editing', false, forceToUpdate);
       update(newNode, 'editing', true, forceToUpdate);

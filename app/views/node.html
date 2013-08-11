@@ -2,5 +2,5 @@
   <i ng-class="{'icon-chevron-down': !collapsed, 'icon-chevron-right': collapsed}" />
   <i ng-class="{'icon-folder-close': hasChildren(), 'icon-file': !hasChildren()}" />
   <span ng-hide="editing" ng-class="{'focused': focused}" ng-click="focus($event)" ng-dblclick="edit($event)">{{node.label}}</span>
-  <input ng-show="editing" type="text" ng-model="node.label" ng-change="lazySave()" ng-click="cancelEvent($event)" >
+  <input ng-show="editing" type="text" ng-model="node.label" ng-click="cancelEvent($event)" >
 </li>
