@@ -19,6 +19,18 @@ input[type="checkbox"] {
   margin-top: -2px;
 }
 
+tr:nth-child(odd) > td {
+  background-color: #fafafa;
+
+  &:hover {
+    background-color: #eff;
+  }
+
+  &.selected {
+    background-color: #ffc;
+  }
+}
+
 td {
   &:hover {
     background-color: #eff;
