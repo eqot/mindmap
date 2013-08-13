@@ -16,7 +16,7 @@ html, body {
 }
 
 input[type="checkbox"] {
-  margin-top: -2px;
+  margin-top: -4px;
 }
 
 tr:nth-child(odd) > td {
@@ -43,6 +43,7 @@ td {
 
 #star {
   margin-right: 8px;
+  font-size: 16px;
 }
 
 #star-enabled {
