@@ -11,6 +11,7 @@ angular.module('mindmapApp')
 
     $rootScope.$on('save', function () {
       $scope.lazySave();
+      $scope.$apply();
     });
 
     $scope.saved = true;
@@ -18,7 +19,6 @@ angular.module('mindmapApp')
     var saveTimer = null;
     $scope.lazySave = function () {
       $scope.saved = false;
-      $scope.$apply();
 
       cancelLazySave();
 
