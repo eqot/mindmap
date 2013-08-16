@@ -38,6 +38,7 @@ angular.module('mindmapApp')
     function doSave () {
       $scope.mindmap.$update(function () {
         $scope.saved = true;
+        $scope.mindmap._id = id;
       });
     }
 
