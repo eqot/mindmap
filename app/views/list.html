@@ -4,11 +4,7 @@
       <h1>MindMap</h1>
       Search: <input ng-model="query"><br>
       Sort By:
-      <select ng-model="orderProp">
-        <option value="title">Alphabetical</option>
-        <option value="age">Newest</option>
-        <option value="-age">Oldest</option>
-      </select>
+      <select ng-model="orderProp" ng-options="sort.value as sort.name for sort in sorts"></select>
       <button ng-click="createMindMap()">Create MindMap</button>
       <button ng-click="deleteMindMap()">Delete MindMap</button>
     </div>

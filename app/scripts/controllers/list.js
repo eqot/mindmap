@@ -7,6 +7,13 @@ angular.module('mindmapApp')
 
     $scope.mindmaps = MindMap.query();
 
+    $scope.sorts = [
+      {name: 'Alphabetical', value: 'title'},
+      {name: 'Newest', value: 'age'},
+      {name: 'Oldest', value: '-age'}
+    ];
+    $scope.orderProp = $scope.sorts[0].value;
+
     $scope.createMindMap = function () {
       var mindmap = {
         title: 'No title',
