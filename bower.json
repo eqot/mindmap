@@ -2,17 +2,18 @@
   "name": "mindmap",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "~1.0.7",
+    "angular": "v1.2.0rc1",
     "json3": "~3.2.4",
     "jquery": "~1.9.1",
     "bootstrap-sass": "~2.3.1",
     "es5-shim": "~2.0.8",
-    "angular-resource": "~1.0.7",
-    "angular-cookies": "~1.0.7",
-    "angular-sanitize": "~1.0.7"
+    "angular-resource": "v1.2.0rc1",
+    "angular-cookies": "v1.2.0rc1",
+    "angular-sanitize": "v1.2.0rc1",
+    "angular-route": "v1.2.0rc1"
   },
   "devDependencies": {
-    "angular-mocks": "~1.0.7",
-    "angular-scenario": "~1.0.7"
+    "angular-mocks": "v1.2.0rc1",
+    "angular-scenario": "v1.2.0rc1"
   }
 }
