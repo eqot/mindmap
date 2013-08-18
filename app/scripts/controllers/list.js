@@ -40,8 +40,7 @@ angular.module('mindmapApp')
       }
     };
 
-    $scope.toggleStar = function (index) {
-      var mindmap = $scope.mindmaps[index];
+    $scope.toggleStar = function (mindmap) {
       if (mindmap.star) {
         mindmap.star = false;
       } else {
