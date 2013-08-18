@@ -1,11 +1,16 @@
 'use strict';
 
 angular.module('mindmapApp')
-  .controller('ListCtrl', function ($scope, $rootScope, MindMap) {
+  .controller('ListCtrl', function ($scope, $rootScope, MindMap, MindMap2) {
 
     $rootScope.title = '';
 
-    $scope.mindmaps = MindMap.query();
+    // $scope.mindmaps = MindMap.query();
+
+    MindMap2.query(function (data) {
+      // console.log(data);
+      $scope.mindmaps = data;
+    });
 
     $scope.sorts = [
       {name: 'Alphabetical', value: 'title'},
@@ -23,7 +28,12 @@ angular.module('mindmapApp')
         }]
       };
 
-      MindMap.save(mindmap, function (res) {
+      // MindMap.save(mindmap, function (res) {
+      //   mindmap._id = res._id;
+      //   $scope.mindmaps.push(mindmap);
+      // });
+      MindMap2.save(mindmap, function (res) {
+        console.log(res);
         mindmap._id = res._id;
         $scope.mindmaps.push(mindmap);
       });
@@ -35,7 +45,8 @@ angular.module('mindmapApp')
         if (mindmap.selected) {
           $scope.mindmaps.splice(i, 1);
 
-          mindmap.$delete();
+          // mindmap.$delete();
+          MindMap2.remove(mindmap._id);
         }
       }
     };

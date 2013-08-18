@@ -1,11 +1,15 @@
 'use strict';
 
 angular.module('mindmapApp')
-  .controller('DetailCtrl', function ($scope, $rootScope, $routeParams, MindMap) {
+  .controller('DetailCtrl', function ($scope, $rootScope, $routeParams, MindMap, MindMap2) {
 
     var id = $routeParams.id;
 
-    $scope.mindmap = MindMap.get({id: id}, function () {
+    // $scope.mindmap = MindMap.get({id: id}, function () {
+    //   $rootScope.title = ': ' + $scope.mindmap.title;
+    // });
+    MindMap2.get(id, function (res) {
+      $scope.mindmap = res;
       $rootScope.title = ': ' + $scope.mindmap.title;
     });
 
@@ -20,12 +24,14 @@ angular.module('mindmapApp')
     $scope.lazySave = function () {
       $scope.saved = false;
 
-      cancelLazySave();
+      doSave();
 
-      saveTimer = setTimeout(function () {
-        saveTimer = null;
-        doSave();
-      }, 3000);
+      // cancelLazySave();
+
+      // saveTimer = setTimeout(function () {
+      //   saveTimer = null;
+      //   doSave();
+      // }, 3000);
     };
 
     function cancelLazySave () {
@@ -36,9 +42,15 @@ angular.module('mindmapApp')
     }
 
     function doSave () {
-      $scope.mindmap.$update(function () {
+      // $scope.mindmap.$update(function () {
+      //   $scope.saved = true;
+      //   $scope.mindmap._id = id;
+      // });
+
+      MindMap2.update(id, $scope.mindmap, function (res) {
+        console.log(res);
+
         $scope.saved = true;
-        $scope.mindmap._id = id;
       });
     }
 
