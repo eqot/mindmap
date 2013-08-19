@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mindmapApp')
-  .controller('DetailCtrl', function ($scope, $rootScope, $routeParams, MindMap, MindMap2) {
+  .controller('DetailCtrl', function ($scope, $rootScope, $routeParams, MindMap, MindMap2, $timeout) {
 
     var id = $routeParams.id;
 
@@ -24,19 +24,17 @@ angular.module('mindmapApp')
     $scope.lazySave = function () {
       $scope.saved = false;
 
-      doSave();
+      cancelLazySave();
 
-      // cancelLazySave();
-
-      // saveTimer = setTimeout(function () {
-      //   saveTimer = null;
-      //   doSave();
-      // }, 3000);
+      saveTimer = $timeout(function () {
+        saveTimer = null;
+        doSave();
+      }, 3000);
     };
 
     function cancelLazySave () {
       if (saveTimer) {
-        clearTimeout(saveTimer);
+        $timeout.cancel(saveTimer);
         saveTimer = null;
       }
     }
@@ -48,8 +46,6 @@ angular.module('mindmapApp')
       // });
 
       MindMap2.update(id, $scope.mindmap, function (res) {
-        console.log(res);
-
         $scope.saved = true;
       });
     }
