@@ -1,14 +1,11 @@
 'use strict';
 
 angular.module('mindmapApp')
-  .controller('ListCtrl', function ($scope, $rootScope, MindMap, MindMap2) {
+  .controller('ListCtrl', function ($scope, $rootScope, MindMap) {
 
     $rootScope.title = '';
 
-    // $scope.mindmaps = MindMap.query();
-
-    MindMap2.query(function (data) {
-      // console.log(data);
+    MindMap.query(function (data) {
       $scope.mindmaps = data;
     });
 
@@ -28,12 +25,8 @@ angular.module('mindmapApp')
         }]
       };
 
-      // MindMap.save(mindmap, function (res) {
-      //   mindmap._id = res._id;
-      //   $scope.mindmaps.push(mindmap);
-      // });
-      MindMap2.save(mindmap, function (res) {
-        console.log(res);
+      MindMap.save(mindmap, function (res) {
+        // console.log(res);
         mindmap._id = res._id;
         $scope.mindmaps.push(mindmap);
       });
@@ -45,8 +38,7 @@ angular.module('mindmapApp')
         if (mindmap.selected) {
           $scope.mindmaps.splice(i, 1);
 
-          // mindmap.$delete();
-          MindMap2.remove(mindmap._id);
+          MindMap.remove(mindmap._id);
         }
       }
     };
