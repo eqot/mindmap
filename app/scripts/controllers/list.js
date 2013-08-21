@@ -11,8 +11,8 @@ angular.module('mindmapApp')
 
     $scope.sorts = [
       {name: 'Alphabetical', value: 'title'},
-      {name: 'Newest', value: 'age'},
-      {name: 'Oldest', value: '-age'}
+      {name: 'Newest', value: '-date'},
+      {name: 'Oldest', value: 'date'}
     ];
     $scope.orderProp = $scope.sorts[0].value;
 
@@ -22,7 +22,8 @@ angular.module('mindmapApp')
         content: [{
           label: 'root',
           children: []
-        }]
+        }],
+        date: new Date()
       };
 
       MindMap.save(mindmap, function (res) {
